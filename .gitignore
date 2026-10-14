@@ -1,0 +1,14 @@
+# Archivos locales de macOS y del editor
+.DS_Store
+._*
+.vscode/
+.idea/
+
+# Credenciales y archivos temporales
+.env
+.env.*
+*.log
+work/
+
+# Documentación privada local
+LEEME.md

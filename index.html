@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5efe4">
+  <title>Nereida & Samir · Nuestra boda</title>
+  <link rel="stylesheet" href="css/estilos.css">
+  <script src="js/configuracion.js" defer></script>
+  <script src="js/invitacion.js" defer></script>
+</head>
+<body class="invitacion-cerrada">
+  <div id="sobre" class="apertura escenario">
+    <div class="apertura-contenido">
+    <p class="apertura-titulo">ESTÁS CORDIALMENTE<br>INVITADO</p>
+    <button id="abrir" class="sobre-cerrado" aria-label="Abrir invitación de Nereida y Samir">
+      <span class="sobre-base" aria-hidden="true"></span>
+      <span class="sobre-pliegue" aria-hidden="true"></span>
+      <span class="sobre-solapa" aria-hidden="true"></span>
+      <span class="sello" aria-hidden="true">N<span>&</span>S</span>
+    </button>
+    <p class="caligrafia apertura-indicacion">Toca el sobre<br>para abrir…</p>
+    </div>
+  </div>
+
+  <div id="petalos" aria-hidden="true"></div>
+  <main>
+    <div class="fondo-continuo-escritorio" id="fondo-escritorio" aria-hidden="true"></div>
+    <section class="portada escenario" aria-labelledby="nombres">
+      <div class="sobre-abierto" aria-hidden="true"></div>
+      <figure class="polaroid foto-principal">
+        <div class="ventana-foto foto-pendiente">
+          <img id="foto-portada" hidden alt="Nereida y Samir juntos">
+          <span class="foto-placeholder">Aquí irá su fotografía</span>
+        </div>
+        <figcaption class="caligrafia">¡Nos casamos!</figcaption>
+      </figure>
+      <article class="tarjeta-ovalada">
+        <p>Con nuestras familias,<br>te invitamos a celebrar la boda de</p>
+        <h1 id="nombres"><span data-novia>Nereida</span><small>&</small><span data-novio>Samir</span></h1>
+        <p class="fecha" data-fecha>20 · MAYO · 2027</p>
+        <p class="nota-prueba">Fecha de prueba · pendiente de confirmar</p>
+        <p class="direccion-portada"><span data-lugar>Marina Vallarta 770</span><br><span data-ciudad>Colonia Santa Margarita, Zapopan, Jalisco</span></p>
+      </article>
+      <a class="scroll" href="#cuenta-regresiva" aria-label="Continuar leyendo la invitación">↓</a>
+    </section>
+
+    <section id="cuenta-regresiva" class="escenario revelar contador">
+      <button class="tocadiscos" id="tocadiscos" type="button" aria-label="Reproducir canción" aria-pressed="false">
+        <div class="tapa-disco caligrafia">El soundtrack<br>de nuestro amor</div>
+        <div class="base-disco"><div class="vinilo"><span>N & S</span></div><div class="brazo-disco"></div></div>
+      </button>
+      <p class="estado-musica" id="estado-musica" role="status">Toca el disco para escuchar nuestra canción</p>
+      <audio id="cancion" preload="none" loop></audio>
+      <article class="tarjeta tarjeta-cuenta">
+        <h2>FALTA POCO PARA<span class="caligrafia">nuestra boda</span></h2>
+        <div class="cuenta">
+          <div><b id="dias">—</b><span>Días</span></div>
+          <div><b id="horas">—</b><span>Horas</span></div>
+          <div><b id="minutos">—</b><span>Minutos</span></div>
+          <div><b id="segundos">—</b><span>Segundos</span></div>
+        </div>
+        <a id="calendario" class="boton" target="_blank" rel="noopener">Guardar en calendario</a>
+      </article>
+      <div class="galeria">
+        <figure class="polaroid">
+          <div class="ventana-foto foto-pendiente"><img id="foto-recuerdo-1" hidden alt="Un recuerdo juntos"><span class="foto-placeholder">Un recuerdo juntos</span></div>
+          <figcaption class="caligrafia">Tú y yo</figcaption>
+        </figure>
+        <figure class="polaroid">
+          <div class="ventana-foto foto-pendiente"><img id="foto-recuerdo-2" hidden alt="Un momento especial de Nereida y Samir"><span class="foto-placeholder">Su momento favorito</span></div>
+          <figcaption class="caligrafia">Para siempre</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="escenario revelar ubicacion">
+      <article class="tarjeta">
+        <h2><span class="caligrafia">Nuestro</span> LUGAR</h2>
+        <div class="separador" aria-hidden="true">✥</div>
+        <h3 data-lugar>Marina Vallarta 770</h3>
+        <p data-ciudad>Colonia Santa Margarita, Zapopan, Jalisco</p>
+        <div class="postal-lugar"><img src="assets/ilustraciones/lugar.svg" alt=""><p>Aquí comienza<br><span class="caligrafia">nuestro para siempre</span></p></div>
+        <p>Nos encantará compartir contigo un día lleno de amor, abrazos y recuerdos inolvidables.</p>
+        <a id="mapa" class="boton" target="_blank" rel="noopener">Ver ubicación</a>
+      </article>
+    </section>
+
+    <section class="escenario revelar agenda">
+      <article class="tarjeta">
+        <h2>EL <span class="caligrafia">gran día</span></h2>
+        <div class="separador" aria-hidden="true">✥</div>
+        <p class="nota-prueba">Horarios de ejemplo · pendientes de confirmar</p>
+        <ol class="itinerario">
+          <li><img src="assets/ilustraciones/anillos.svg" alt=""><div><time>4:00 PM</time><span>Bienvenida</span></div></li>
+          <li><img src="assets/ilustraciones/anillos.svg" alt=""><div><time>5:00 PM</time><span>Ceremonia</span></div></li>
+          <li><img src="assets/ilustraciones/brindis.svg" alt=""><div><time>6:00 PM</time><span>Cóctel y brindis</span></div></li>
+          <li><img src="assets/ilustraciones/cena.svg" alt=""><div><time>8:00 PM</time><span>Cena</span></div></li>
+          <li><img src="assets/ilustraciones/baile.svg" alt=""><div><time>10:30 PM</time><span>¡A bailar!</span></div></li>
+        </ol>
+      </article>
+    </section>
+
+    <section class="escenario revelar regalos">
+      <article class="tarjeta">
+        <h2><span class="caligrafia">Los</span> DETALLES</h2>
+        <div class="separador" aria-hidden="true">✥</div>
+        <img class="icono-regalo" src="assets/ilustraciones/regalo.svg" alt="">
+        <h3>REGALOS</h3>
+        <p class="texto-cursiva">Tu cariño y tu presencia son nuestro mejor regalo. Si deseas tener un detalle con nosotros, aquí compartiremos nuestra mesa de regalos.</p>
+        <p class="nota-prueba">Información pendiente de confirmar</p>
+      </article>
+    </section>
+
+    <section id="asistencia" class="escenario revelar asistencia">
+      <div class="sobre-rsvp">
+        <article class="tarjeta">
+          <span class="caligrafia">Con cariño</span>
+          <h2>CONFIRMA</h2>
+          <span class="caligrafia">tu asistencia</span>
+          <div class="separador" aria-hidden="true">✥</div>
+          <p>Completa el formulario de abajo</p>
+        </article>
+      </div>
+      <form id="formulario" class="tarjeta">
+        <label for="nombre">Tu nombre completo</label>
+        <input id="nombre" name="nombre" autocomplete="name" required maxlength="100">
+        <fieldset>
+          <legend>¿Nos acompañarás en este día tan especial?</legend>
+          <label class="opcion"><input type="radio" name="asiste" value="Sí" checked> ¡Sí, con mucha alegría!</label>
+          <label class="opcion"><input type="radio" name="asiste" value="No"> No podré acompañarlos</label>
+        </fieldset>
+        <label for="acompanantes">Acompañantes</label>
+        <select name="acompanantes" id="acompanantes"><option value="0">Solo yo</option><option value="1">Un acompañante</option></select>
+        <label for="ninos">Niños</label>
+        <input type="number" name="ninos" id="ninos" min="0" max="5" step="1" value="0">
+        <label for="mensaje">Un mensaje para los novios</label>
+        <textarea id="mensaje" name="mensaje" rows="3" maxlength="1000"></textarea>
+        <button class="boton boton-enviar" type="submit">Enviar confirmación</button>
+        <p id="estado" role="status"></p>
+      </form>
+    </section>
+
+    <footer class="escenario revelar despedida">
+      <div class="tarjeta tarjeta-despedida">
+      <p class="caligrafia">Nuestra mejor aventura<br>está por comenzar</p>
+      <h2><span data-novia>Nereida</span> & <span data-novio>Samir</span></h2>
+      <p>Gracias por ser parte de nuestra historia.</p>
+      </div>
+    </footer>
+  </main>
+  <a class="rsvp-flotante" href="#asistencia">CONFIRMAR <span class="caligrafia">asistencia</span></a>
+</body>
+</html>

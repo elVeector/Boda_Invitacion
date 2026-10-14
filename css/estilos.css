@@ -1,0 +1,430 @@
+/* 01. Tipografías locales y paleta de papelería marfil */
+@font-face {
+  font-family: "Great Vibes";
+  src: url("../assets/tipografias/great-vibes.ttf") format("truetype");
+  font-display: swap;
+}
+@font-face {
+  font-family: "Cormorant Garamond";
+  src: url("../assets/tipografias/cormorant-garamond.ttf") format("truetype");
+  font-display: swap;
+}
+:root {
+  --papel: #f6f1e7;
+  --tinta: #514531;
+  --oro: #b69a5d;
+  --linea: #cbb98c;
+  --serif: "Cormorant Garamond", Georgia, serif;
+  --script: "Great Vibes", cursive;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-snap-type: y mandatory; }
+body { margin: 0; color: var(--tinta); background: #d9d0c4; font-family: var(--serif); }
+body.invitacion-cerrada { overflow: hidden; }
+main {
+  width: min(100%, 800px);
+  margin: auto;
+  box-shadow: 0 0 70px #55412820;
+  background-color: #f4efe5;
+  background-image: url("../assets/fondo-papel-continuo.png");
+  /* Ajustar solo el ancho conserva las proporciones de flores y anillos. */
+  background-size: 100% auto;
+  background-repeat: repeat-y;
+}
+button, input, select, textarea { font: inherit; }
+h1, h2, h3, p, figure { margin: 0; }
+p { font-size: 19px; line-height: 1.35; }
+.caligrafia { font-family: var(--script); font-weight: 400; line-height: 1.1; }
+h2 { font-size: clamp(25px, 4vw, 34px); font-weight: 400; letter-spacing: 2px; line-height: 1.15; }
+h2 .caligrafia { display: inline-block; font-size: clamp(45px, 7vw, 65px); letter-spacing: 0; color: #ad915c; }
+h3 { font-size: 25px; font-weight: 400; margin: 18px 0 12px; }
+:focus-visible { outline: 3px solid #8f6b32; outline-offset: 5px; }
+/* 02. Escenarios de papel y flores; paneles independientes sin recortar contenido */
+.escenario {
+  position: relative;
+  isolation: isolate;
+  /* Un lienzo continuo detrás de todas las tarjetas. */
+  background: transparent;
+}
+.apertura.escenario {
+  background-color: #f4efe5;
+  background-image: url("../assets/fondo-inicio-anillos.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+section, footer {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 90px 10% 100px;
+  text-align: center;
+  scroll-snap-align: start;
+  gap: 35px;
+}
+.tarjeta {
+  position: relative;
+  width: 100%;
+  padding: 35px 28px;
+  background: linear-gradient(120deg, #fcf8f0, #f1ebdf);
+  border: 1px solid #fff9;
+  box-shadow: 2px 6px 8px #57452f30, inset 0 0 0 1px #d8cdb320;
+}
+.tarjeta p + p { margin-top: 15px; }
+.tarjeta .boton { margin-top: 24px; }
+.separador { display: flex; align-items: center; justify-content: center; gap: 10px; color: var(--oro); margin: 20px 0; font-size: 24px; }
+.separador::before, .separador::after { content: ""; width: 35%; height: 1px; background: var(--linea); }
+.nota-prueba { font: 10px/1.5 Arial, sans-serif; color: #928570; letter-spacing: .4px; }
+.boton { display: inline-flex; justify-content: center; align-items: center; min-height: 43px; max-width: 100%; padding: 9px 20px; border: 2px solid #c5af78; border-radius: 30px; color: var(--tinta); background: #faf7ef; font-size: 16px; text-transform: uppercase; letter-spacing: 1px; text-decoration: none; cursor: pointer; transition: background .2s; }
+.boton:hover { background: #eadcba; }
+/* 03. Sobre cerrado realista con solapa y sello */
+.apertura { position: fixed; inset: 0; z-index: 10; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 55px; padding: 65px 28px; text-align: center; transition: opacity .8s 1s, visibility .8s 1s; }
+.apertura-titulo { font-size: clamp(24px, 4vw, 34px); line-height: 1.1; }
+.sobre-cerrado { position: relative; width: min(78vw, 440px); aspect-ratio: 1.5; padding: 0; border: 0; background: transparent; transform: rotate(-8deg); filter: drop-shadow(3px 9px 7px #6e583240); cursor: pointer; transition: transform 1s .4s, opacity .7s .5s; }
+.sobre-base { position: absolute; inset: 0; background: linear-gradient(150deg, #fcf9f2, #e9dfcf); border: 1px solid #daceba; }
+.sobre-pliegue { position: absolute; inset: 0; background: linear-gradient(130deg, #e7dece, #fcf7ed 50%, #e4d7c1); clip-path: polygon(0 0, 50% 58%, 100% 0, 100% 100%, 0 100%); }
+.sobre-pliegue::after { content: ""; position: absolute; inset: 0; background: #f1eadf; clip-path: polygon(0 100%, 50% 48%, 100% 100%); }
+.sobre-solapa { position: absolute; inset: 0; background: linear-gradient(#fdfaf3, #e9e0d1); clip-path: polygon(0 0, 100% 0, 50% 62%); transform-origin: top center; transition: transform .9s; backface-visibility: hidden; }
+.sello { position: absolute; left: 50%; top: 60%; transform: translate(-50%, -50%); display: grid; place-items: center; width: 62px; height: 62px; border: 5px double #c6b48d; border-radius: 47% 53% 48% 52%; background: radial-gradient(circle at 30% 25%, #fff4d9, #ded0ad 70%, #b4a178); box-shadow: 1px 3px 5px #705a3d50; color: #a59065; font-family: var(--script); font-size: 25px; transition: opacity .3s; }
+.sello span { display: none; }
+.apertura-indicacion { font-size: clamp(38px, 6vw, 55px); }
+.apertura.abierto { opacity: 0; visibility: hidden; pointer-events: none; }
+.abierto .sobre-solapa { transform: rotateX(180deg); }
+.abierto .sello { opacity: 0; }
+.abierto .sobre-cerrado { transform: translateY(25px) rotate(0) scale(1.06); opacity: 0; }
+/* 04. Sobre abierto, Polaroid y tarjeta ovalada de la pareja */
+.portada { padding-top: 100px; gap: 0; }
+.sobre-abierto { position: absolute; width: 76%; height: 340px; top: 180px; background: linear-gradient(130deg, #f9f4e9, #e7ddce); box-shadow: 2px 7px 12px #5c482a30; border: 1px solid #dcd1bd; z-index: -1; }
+.sobre-abierto::before { content: ""; position: absolute; left: 0; right: 0; height: 160px; top: -159px; background: #e8dfd0; clip-path: polygon(0 100%, 50% 0, 100% 100%); }
+.sobre-abierto::after { content: ""; position: absolute; inset: 0; background: linear-gradient(135deg, #f2ecdf, #fcf9ef); clip-path: polygon(0 0, 50% 55%, 100% 0, 100% 100%, 0 100%); }
+.polaroid { padding: 11px 11px 7px; background: #fffaf1; box-shadow: 3px 6px 7px #56452f40; }
+.foto-principal { width: 78%; max-width: 340px; transform: rotate(-4deg); margin-bottom: 55px; }
+.ventana-foto { position: relative; aspect-ratio: 4 / 3; background: linear-gradient(145deg, #d6cdbd, #b9ad9b); overflow: hidden; }
+.ventana-foto img { width: 100%; height: 100%; object-fit: cover; display: block; }
+#foto-portada { filter: grayscale(1); }
+.ventana-foto img[hidden] { display: none; }
+.foto-placeholder { display: flex; align-items: center; justify-content: center; height: 100%; min-height: 120px; padding: 15px; font-size: 16px; font-style: italic; color: #f7f1e5; }
+.polaroid figcaption { font-size: 32px; padding: 12px 3px 3px; color: #6b604c; }
+.tarjeta-ovalada { position: relative; width: 82%; max-width: 380px; padding: 45px 28px; background: linear-gradient(145deg, #fffaf0, #efe6d6); border: 5px double #d7c8aa; border-radius: 46% 46% 42% 42% / 16% 16% 15% 15%; box-shadow: 2px 7px 9px #56452f40; }
+.tarjeta-ovalada p { font-size: 17px; line-height: 1.15; }
+h1 { display: flex; flex-direction: column; font-family: var(--script); font-weight: 400; font-size: clamp(55px, 9vw, 78px); line-height: 1; margin: 20px 0; }
+h1 small { font-size: 28px; margin: 8px 0; }
+.tarjeta-ovalada .nota-prueba { font-size: 9px; margin-top: 10px; }
+.direccion-portada { margin-top: 18px; }
+.scroll { font-size: 30px; margin-top: 25px; color: #a68a50; text-decoration: none; padding: 6px 18px; }
+/* 05. Tocadiscos, cuenta y fotografías */
+.tocadiscos { width: 65%; max-width: 280px; transform: rotate(-8deg); }
+.tapa-disco { height: 110px; display: grid; place-items: center; padding: 15px; border: 7px ridge #e0d6c3; background: #f6f0e4; box-shadow: 2px 3px 6px #68543744; font-size: 32px; }
+.base-disco { position: relative; height: 180px; background: #f1e8d8; border: 7px ridge #e0d6c3; box-shadow: 3px 5px 8px #68543744; padding: 12px; }
+.vinilo { width: 145px; height: 145px; display: grid; place-items: center; border-radius: 50%; background: repeating-radial-gradient(#161513 0 1px, #2b2925 2px 3px); }
+.vinilo span { width: 50px; height: 50px; display: grid; place-items: center; border-radius: 50%; background: #eee5d5; font-size: 12px; }
+.brazo-disco { position: absolute; top: 20px; right: 25px; width: 5px; height: 115px; background: #c1aa70; transform: rotate(20deg); box-shadow: 1px 1px 2px #68543780; }
+.brazo-disco::after { content: ""; position: absolute; bottom: -5px; left: -4px; width: 12px; height: 25px; background: #fdf6e8; }
+.tarjeta-cuenta h2 .caligrafia { display: block; }
+.cuenta { display: grid; grid-template-columns: repeat(4, 1fr); margin-top: 15px; gap: 8px; }
+.cuenta b { font-size: clamp(29px, 5vw, 44px); font-weight: 400; display: block; }
+.cuenta span { font-size: 10px; text-transform: uppercase; }
+.galeria { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; width: 100%; }
+.galeria .polaroid:first-child { transform: rotate(-10deg); }
+.galeria .polaroid:last-child { transform: rotate(8deg); }
+.galeria .ventana-foto { aspect-ratio: 3 / 4; }
+.galeria figcaption { font-size: 27px; }
+/* 06. Ubicación, programa y detalles */
+.postal-lugar { display: flex; align-items: center; justify-content: center; padding: 20px 12px; margin: 22px 0; border-radius: 15px; background: #e7dfcf; }
+.postal-lugar img { width: 85px; height: 95px; }
+.postal-lugar p { font-size: 15px; }
+.postal-lugar .caligrafia { font-size: 27px; }
+.itinerario { list-style: none; padding: 0; margin: 20px 0 0; }
+.itinerario li { display: grid; grid-template-columns: 80px 1fr; gap: 18px; align-items: center; padding: 13px 0; }
+.itinerario img { width: 75px; height: 68px; }
+.itinerario time { font-size: 27px; display: block; padding-bottom: 5px; border-bottom: 1px solid var(--linea); }
+.itinerario span { display: block; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; margin-top: 8px; }
+.icono-regalo { width: 70px; height: 70px; }
+.texto-cursiva { font-style: italic; }
+.regalos .nota-prueba { margin-top: 25px; }
+/* 07. Sobre RSVP y formulario de papel */
+.sobre-rsvp { width: 100%; position: relative; padding: 30px 15px 15px; margin-top: 70px; background: #ede4d4; box-shadow: 3px 8px 10px #6e583230; }
+.sobre-rsvp::before { content: ""; position: absolute; inset: -90px 0 auto; height: 100px; background: #e5dbca; clip-path: polygon(0 100%, 50% 0, 100% 100%); }
+.sobre-rsvp .caligrafia { display: block; font-size: 40px; }
+.sobre-rsvp h2 { margin: 10px 0; }
+form.tarjeta { text-align: left; padding: 30px; }
+form > label, legend { display: block; margin: 22px 0 9px; font-size: 18px; }
+form > label:first-child { margin-top: 0; }
+input:not([type="radio"]), select, textarea { width: 100%; min-height: 44px; border: 1px solid #b9b1a0; border-radius: 0; padding: 10px; background: #faf7ef; color: var(--tinta); font-size: 17px; }
+fieldset { padding: 0; margin: 20px 0 0; border: 0; }
+.opcion { display: block; padding: 12px; margin: 8px 0; background: #e0d8ce; font-size: 17px; cursor: pointer; }
+input[type="radio"] { accent-color: #9f8350; margin-right: 8px; }
+textarea { resize: vertical; }
+.boton-enviar { width: 100%; border-radius: 3px; background: #d8c6ad; border: 0; text-transform: none; font-size: 21px; }
+#estado { margin-top: 15px; font: 12px/1.6 Arial, sans-serif; }
+.despedida .caligrafia { font-size: 47px; }
+.despedida h2 { font-family: var(--script); font-size: 55px; letter-spacing: 0; }
+/* 08. Botón dorado fijo, dentro del espacio de la invitación */
+.rsvp-flotante { position: fixed; bottom: max(12px, env(safe-area-inset-bottom)); left: 50%; z-index: 5; transform: translateX(-50%); display: inline-flex; align-items: center; gap: 10px; padding: 8px 23px; border-radius: 50px; border: 3px solid #d3b25e; background: linear-gradient(110deg, #f6d884, #fff5d1 48%, #f6d884); color: #2b2113; box-shadow: 0 3px 7px #7c602b33; font-size: 23px; text-decoration: none; white-space: nowrap; }
+.rsvp-flotante .caligrafia { font-size: 30px; }
+.invitacion-cerrada .rsvp-flotante { visibility: hidden; }
+.revelar > * { opacity: 0; transform: translateY(18px); transition: opacity .7s, transform .7s; }
+.revelar.visible > * { opacity: 1; transform: none; }
+/* 09. Adaptación a celular, tableta, PC y preferencias de movimiento */
+@media (min-width: 700px) {
+  section, footer { padding-left: 16%; padding-right: 16%; }
+  .apertura { background-size: cover; }
+}
+@media (max-width: 420px) {
+  section, footer { padding-left: 8%; padding-right: 8%; }
+  .tarjeta { padding: 28px 21px; }
+  .tarjeta-ovalada { width: 90%; padding: 40px 22px; }
+  .tocadiscos { width: 75%; }
+  .rsvp-flotante { font-size: 19px; }
+  .rsvp-flotante .caligrafia { font-size: 27px; }
+  form.tarjeta { padding: 25px 21px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; scroll-snap-type: none; }
+  *, *::before, *::after { transition: none !important; }
+  .revelar > * { opacity: 1; transform: none; }
+}
+
+/* Pétalos blancos animados con CSS; capa independiente del contenido. */
+#petalos { position: fixed; inset: 0; pointer-events: none; z-index: 12; overflow: hidden; }
+.petalo {
+  position: absolute;
+  left: var(--x);
+  top: -40px;
+  width: var(--tamano);
+  height: calc(var(--tamano) * 1.4);
+  border-radius: 85% 15% 70% 30%;
+  background: radial-gradient(ellipse at 30% 25%, #ffffff, #fffdf8 55%, #e5dad0);
+  box-shadow: 1px 2px 5px #5b3e3022;
+  opacity: 0;
+  animation: caer-petalo var(--duracion) var(--espera) linear forwards;
+}
+@keyframes caer-petalo {
+  0% { opacity: 0; transform: translate3d(0, 0, 0) rotate(0deg); }
+  8% { opacity: .9; }
+  45% { transform: translate3d(calc(var(--deriva) * -.5), 50vh, 0) rotate(100deg); }
+  90% { opacity: .85; }
+  100% { opacity: 0; transform: translate3d(var(--deriva), calc(100vh + 80px), 0) rotate(var(--giro)); }
+}
+@media (max-width: 600px) {
+  .galeria { gap: 12px; }
+  .foto-portada { width: 130px; height: 150px; }
+  .portada { padding-top: 65px; padding-bottom: 45px; }
+  .marco-lazo { padding: 30px 12px; }
+  .encaje, .despedida { padding-inline: 42px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .petalo { display: none; animation: none; }
+}
+
+
+
+.foto-placeholder[hidden] { display: none; }
+
+/* Inicio: cubrir la pantalla conserva la proporción y elimina la franja inferior.
+   La zona segura de los anillos tolera el recorte lateral de pantallas altas. */
+.apertura.escenario {
+  background-size: cover;
+  background-position: center top;
+  height: 100dvh;
+  min-height: 0;
+  padding: 0;
+  display: block;
+}
+.apertura-titulo {
+  position: absolute;
+  top: 25%;
+  left: 8%;
+  width: 84%;
+  font-size: clamp(23px, 4vw, 34px);
+}
+.apertura .sobre-cerrado {
+  position: absolute;
+  top: 39%;
+  left: 50%;
+  width: min(78vw, 440px);
+  transform: translateX(-50%) rotate(-8deg);
+}
+.apertura .apertura-indicacion {
+  position: absolute;
+  top: 70%;
+  left: 43%;
+  width: 52%;
+  font-size: clamp(30px, 5vw, 48px);
+  line-height: 1.15;
+  text-align: center;
+}
+.apertura.abierto .sobre-cerrado {
+  transform: translateX(-50%) translateY(25px) rotate(0) scale(1.06);
+}
+@media (min-aspect-ratio: 3/4) {
+  .apertura.escenario {
+    /* En tabletas y PC se conserva la composición vertical sin agrandarla. */
+    background-size: auto 100%;
+    background-color: #f4efe5;
+  }
+  .apertura .apertura-indicacion {
+    top: 80%;
+    left: 50%;
+    width: min(350px, 45%);
+    transform: translateX(-50%);
+    font-size: 36px;
+  }
+}
+
+/* Tocadiscos interactivo: bisagra de la aguja y giro del vinilo. */
+button.tocadiscos {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--tinta);
+  text-align: center;
+  cursor: pointer;
+}
+.brazo-disco {
+  transform-origin: 50% 0;
+  transform: rotate(20deg);
+  transition: transform .85s ease;
+}
+.reproduciendo .brazo-disco { transform: rotate(48deg); }
+.vinilo { animation: girar-vinilo 5s linear infinite; animation-play-state: paused; }
+.reproduciendo .vinilo { animation-play-state: running; }
+@keyframes girar-vinilo { to { transform: rotate(360deg); } }
+.estado-musica {
+  width: min(100%, 330px);
+  height: 64px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  line-height: 1.35;
+  padding: 8px 16px;
+  border-radius: 20px;
+  background: #faf6ee;
+  font-size: 15px;
+}
+/* El cierre tiene su propia superficie de papel, sin flores detrás del texto. */
+.tarjeta-despedida {
+  padding: 45px 26px;
+  background: #f8f2e7;
+  border: 5px double #d6c5a2;
+}
+.tarjeta-despedida .caligrafia { font-size: clamp(35px, 6vw, 47px); }
+.tarjeta-despedida h2 { margin: 28px 0; font-size: clamp(42px, 7vw, 55px); }
+.tarjeta-despedida > p:last-child { font-size: 19px; color: #514531; }
+@media (prefers-reduced-motion: reduce) {
+  .vinilo { animation: none; }
+}
+
+/* 12. Reproductor visible y apertura contenida en cualquier relación de pantalla. */
+.musica-youtube { width: 100%; max-width: 540px; padding: 12px; background: #f8f2e7; border: 1px solid #d6c5a2; }
+.musica-youtube[hidden] { display: none; }
+.musica-youtube iframe { display: block; width: 100%; height: 240px; border: 0; }
+.musica-youtube a { display: block; color: #67512e; font-size: 16px; margin: 12px 0 0; }
+.apertura.escenario { background: #e7dfd2; display: flex; padding: 0; }
+.apertura-contenido { position: relative; width: min(100%, 50dvh); height: 100%; background: #f4efe5 url("../assets/fondo-inicio-anillos.png") center top / cover no-repeat; }
+.apertura .sobre-cerrado { width: 78%; }
+.apertura .apertura-indicacion { top: 72%; left: 43%; width: 52%; transform: none; font-size: clamp(28px, 4dvh, 43px); }
+.apertura .apertura-titulo { font-size: clamp(23px, 3.5dvh, 30px); }
+/* 13. Composición específica de tableta y escritorio. */
+@media (min-width: 900px) {
+  main { width: min(100%, 1200px); background-size: 100% auto; }
+  section, footer { padding: 100px 10%; gap: 40px; }
+  .portada { display: grid; grid-template-columns: 1fr 1fr; align-content: center; justify-items: center; gap: 40px; }
+  .sobre-abierto { width: 42%; left: 8%; top: 26%; height: 300px; }
+  .foto-principal { width: 100%; max-width: 350px; margin: 0; align-self: center; }
+  .tarjeta-ovalada { width: 100%; max-width: 390px; }
+  .scroll { grid-column: 1 / -1; margin-top: 0; }
+  .contador { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr); align-content: center; justify-items: center; gap: 28px 55px; }
+  .tocadiscos { grid-column: 1; grid-row: 1; width: 100%; max-width: 280px; }
+  .estado-musica { grid-column: 1; grid-row: 2; text-align: center; }
+  .tarjeta-cuenta { grid-column: 2; grid-row: 1 / span 2; }
+  .musica-youtube { grid-column: 1 / -1; }
+  .galeria { grid-column: 1 / -1; max-width: 570px; gap: 35px; }
+  .galeria .ventana-foto { aspect-ratio: 4 / 3; }
+  .ubicacion .tarjeta, .regalos .tarjeta { max-width: 660px; padding: 50px; }
+  .agenda .tarjeta { max-width: 650px; padding: 45px 65px; }
+  .asistencia { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); align-items: start; align-content: center; gap: 45px; }
+  .sobre-rsvp { margin-top: 130px; }
+  form.tarjeta { margin: 0; padding: 35px; }
+  .tarjeta-despedida { max-width: 660px; }
+  .rsvp-flotante { font-size: 19px; }
+}
+@media (max-height: 650px) and (min-width: 900px) {
+  .apertura .sobre-cerrado { top: 40%; }
+  .apertura .apertura-titulo { top: 24%; font-size: 20px; }
+}
+
+/* 14. Escritorio a pantalla completa con recurso horizontal dedicado. */
+@media (min-width: 900px) {
+  body { background: #f4efe5; }
+  main {
+    width: 100%;
+    max-width: none;
+    box-shadow: none;
+    background-image: url("../assets/fondo-escritorio.png");
+    background-size: 100% auto;
+  }
+  section, footer {
+    min-height: 100dvh;
+    padding-left: max(8%, calc((100vw - 1100px) / 2));
+    padding-right: max(8%, calc((100vw - 1100px) / 2));
+  }
+  .apertura.escenario {
+    width: 100%;
+    background: #f4efe5 url("../assets/fondo-escritorio.png") center / cover no-repeat;
+  }
+  .apertura-contenido {
+    width: min(850px, 90vw);
+    height: 100%;
+    background: transparent;
+  }
+  .apertura .apertura-titulo { top: 23%; left: 10%; width: 80%; font-size: clamp(28px, 3vw, 40px); }
+  .apertura .sobre-cerrado { top: 37%; width: min(390px, 44vw, 48dvh); }
+  .apertura .apertura-indicacion { top: 81%; left: 20%; width: 60%; font-size: clamp(30px, 4dvh, 42px); }
+  .sobre-abierto { width: min(440px, 38%); left: max(8%, calc((100vw - 1100px) / 2)); }
+}
+
+/* 15. Lienzo continuo de escritorio. Las piezas alternadas comparten el mismo
+   borde exacto: no hay cortes de color o textura entre una imagen y la siguiente. */
+.fondo-continuo-escritorio { display: none; }
+@media (min-width: 900px) {
+  main { position: relative; isolation: isolate; overflow: clip; background-image: none; }
+  main > section, main > footer { z-index: 1; }
+  .fondo-continuo-escritorio {
+    display: block;
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+    pointer-events: none;
+  }
+  .fondo-continuo-escritorio img {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin: 0;
+  }
+  .fondo-continuo-escritorio img:nth-child(even) { transform: scaleY(-1); }
+}
+
+/* Navegación por apartados: ajuste obligatorio al soltar el gesto táctil. */
+main > section, main > footer {
+  scroll-snap-align: start;
+  scroll-snap-stop: normal;
+  scroll-margin-top: 0;
+}
+
+/* Trackpad: desplazamiento nativo, sin cancelar eventos ni bloquear gestos.
+   El navegador conserva la inercia y ajusta la sección al terminar el gesto. */
+html {
+  scroll-behavior: auto;
+  scroll-snap-type: y mandatory;
+}
+main > section, main > footer { scroll-snap-stop: normal; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-snap-type: none; }
+}
